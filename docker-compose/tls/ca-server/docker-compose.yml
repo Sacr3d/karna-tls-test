@@ -1,0 +1,19 @@
+version: "2"
+
+networks:
+  dev-net:
+    external:
+      name: karna-dev-net
+
+services:
+  karna-ca-server:
+    container_name: karna-tls-ca-server
+    image: msassone/karna-tls-ca-server:latest
+    networks:
+      dev-net:
+        ipv4_address: 172.20.0.10
+    volumes:
+      - ../../karna/tls/ca/ca-server:/etc/hyperledger/fabric-ca-server
+      - ../../karna/shared:/shared
+    ports:
+      - 7052:7052

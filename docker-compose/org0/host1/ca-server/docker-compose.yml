@@ -1,0 +1,19 @@
+version: "2"
+
+networks:
+  dev-net:
+    external:
+      name: karna-dev-net
+
+services:
+  karna-org0-ca-server:
+    container_name: karna-org0-ca-server
+    image: msassone/karna-org0-ca-server:latest
+    networks:
+      dev-net:
+        ipv4_address: 172.20.0.11
+    volumes:
+      - ../../../karna/org0/ca/ca-server:/etc/hyperledger/fabric-ca-server
+      - ../../../karna/org0/ca/ca-client:/root/fabric-ca-client
+    ports:
+      - 7053:7053

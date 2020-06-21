@@ -1,0 +1,18 @@
+version: "2"
+
+networks:
+  dev-net:
+    external:
+      name: karna-dev-net
+
+services:
+  karna-ca-client:
+    container_name: karna-tls-ca-client
+    image: msassone/karna-tls-ca-client:latest
+    networks:
+      dev-net:
+        ipv4_address: 172.20.0.20
+    volumes:
+      - ../../karna/tls/ca/ca-client:/root/fabric-ca-client
+      - ../../karna/shared:/shared
+
