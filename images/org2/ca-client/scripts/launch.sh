@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE_CA_CLIENT=/root/fabric-ca-client/admin/fabric-ca-client-config.yaml
+FILE_CA_CLIENT="$FABRIC_CA_CLIENT_HOME/ca/admin/fabric-ca-client-config.yaml"
 
 CONFIG_DIR=/configs
 
@@ -14,7 +14,12 @@ init() {
 
         ./enroll-ca-admin.sh
 
+        ./enroll-peer1.sh
+
+        ./enroll-org2-admin.sh
+
     else
+
         echo "$FILE_CA_CLIENT does not exist."
 
         echo "Will try copying..."
@@ -24,13 +29,21 @@ init() {
             echo "$CONFIG_DIR exists."
             echo "Copying configs to new directory"
 
-            mkdir -p "$FABRIC_CA_CLIENT_HOME/admin"
+            mkdir -p "$FABRIC_CA_CLIENT_HOME/ca/admin"
+
+            cp /configs/fabric-ca-client-config.yaml "$FABRIC_CA_CLIENT_HOME/ca/admin"
+
+            cp /configs/fabric-ca-client-config.yaml "$FABRIC_CA_CLIENT_HOME/peer1"
 
             mv /configs/fabric-ca-client-config.yaml "$FABRIC_CA_CLIENT_HOME/admin"
-
+            
             cd /scripts || exit
 
             ./enroll-ca-admin.sh
+
+            ./enroll-peer1.sh
+
+            ./enroll-org2-admin.sh
 
         else
 

@@ -40,7 +40,7 @@
 #############################################################################
 
 # URL of the Fabric-ca-server (default: http://localhost:7054)
-url: https://0.0.0.0:7055
+url: https://172.20.0.13:7055
 
 # Membership Service Provider (MSP) directory
 # This is useful when the client is used to enroll a peer or orderer, so
@@ -60,7 +60,8 @@ mspdir: msp
 tls:
   # TLS section for secure socket connection
   certfiles:
-    - /etc/hyperledger/fabric-ca-server/tls-cert.pem
+    - /root-ca/tls/tls-ca-cert.pem
+    - /root-ca/org2/org2-ca-cert.pem
   client:
     certfile:
     keyfile:
@@ -100,7 +101,7 @@ tls:
 #
 #############################################################################
 csr:
-  cn: karna-org1-server-ca
+  cn: karna-org2-admin-ca
   keyrequest:
     algo: ecdsa
     size: 256
@@ -113,7 +114,10 @@ csr:
       OU: Karna
   hosts:
     - localhost
-    - 0.0.0.0
+    - 172.20.0.10
+    - 172.20.0.11
+    - 172.20.0.12
+    - 172.20.0.13
 
 #############################################################################
 #  Registration section used to register a new identity with fabric-ca server

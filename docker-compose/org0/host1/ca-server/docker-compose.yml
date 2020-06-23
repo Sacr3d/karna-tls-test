@@ -13,7 +13,8 @@ services:
       dev-net:
         ipv4_address: 172.20.0.11
     volumes:
-      - ../../../karna/org0/ca/ca-server:/etc/hyperledger/fabric-ca-server
-      - ../../../karna/org0/ca/ca-client:/root/fabric-ca-client
+      - ../../../../karna/volumes/org0/host1/ca-msp:/etc/hyperledger/fabric-ca-server
+      - ../../../../karna/volumes/org0/host1/ca-admin-msp:/etc/hyperledger/fabric-ca-client/admin/msp
+      - ../../../../karna/volumes/org0/root-ca:/shared
     ports:
       - 7053:7053

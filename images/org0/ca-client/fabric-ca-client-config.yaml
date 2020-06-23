@@ -40,7 +40,7 @@
 #############################################################################
 
 # URL of the Fabric-ca-server (default: http://localhost:7054)
-url: https://127.20.0.10:7052
+url: https://172.20.0.11:7053
 
 # Membership Service Provider (MSP) directory
 # This is useful when the client is used to enroll a peer or orderer, so
@@ -61,6 +61,7 @@ tls:
   # TLS section for secure socket connection
   certfiles:
     - /root-ca/tls/tls-ca-cert.pem
+    - /root-ca/org0/org0-ca-cert.pem
   client:
     certfile:
     keyfile:
@@ -100,7 +101,7 @@ tls:
 #
 #############################################################################
 csr:
-  cn: karna-tls-admin-ca
+  cn: karna-org0-admin-ca
   keyrequest:
     algo: ecdsa
     size: 256

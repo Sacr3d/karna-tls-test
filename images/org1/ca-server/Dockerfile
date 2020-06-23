@@ -8,7 +8,6 @@ LABEL maintainer "University of Southampton <mattia.sassone.com>"
 
 # ca-server and ca-client will check the following env in order, to get the home cfg path
 ENV FABRIC_CA_SERVER_HOME /etc/hyperledger/fabric-ca-server
-ENV FABRIC_CA_CLIENT_HOME /root/fabric-ca-client
 
 # This is go simplify this Dockerfile
 ENV FABRIC_CA_ROOT $GOPATH/src/github.com/hyperledger/fabric-ca
@@ -21,20 +20,18 @@ ENV PATH=$FABRIC_CA_ROOT/bin:$PATH
 # fabric-ca-server will open service to '0.0.0.0:7054/api/v1/'
 EXPOSE 7054
 
-RUN mkdir -p $FABRIC_CA_SERVER_HOME \
-    $FABRIC_CA_CLIENT_HOME 
+RUN mkdir -p $FABRIC_CA_SERVER_HOME
+
+RUN mkdir -p /shared
 
 COPY fabric-ca-server-config.yaml /configs/fabric-ca-server-config.yaml
-
-COPY fabric-ca-client-config.yaml /configs/fabric-ca-client-config.yaml
 
 COPY /scripts/ /scripts/
 
 RUN chmod +x /scripts/launch.sh
-RUN chmod +x /scripts/enroll.sh
 
 VOLUME $FABRIC_CA_SERVER_HOME
-VOLUME $FABRIC_CA_CLIENT_HOME
+VOLUME /shared
 
 WORKDIR $FABRIC_CA_ROOT
 

@@ -1,0 +1,23 @@
+version: "2"
+
+networks:
+  dev-net:
+    external:
+      name: karna-dev-net
+
+services:
+  karna-org1-ca-client:
+    container_name: karna-org1-ca-client
+    image: msassone/karna-org1-ca-client:latest
+    networks:
+      dev-net:
+        ipv4_address: 172.20.0.22
+    volumes:
+      - ../../../../karna/volumes/org1/host1/ca-admin-msp:/root/fabric-ca-client/org1/ca/admin/msp
+      - ../../../../karna/volumes/org1/host2/local-peer-msp:/root/fabric-ca-client/org1/peer1/msp
+      - ../../../../karna/volumes/org1/host2/tls-ca-msp:/root/fabric-ca-client/org1/peer1/tls-msp
+      - ../../../../karna/volumes/org1/host2/org1-admin-msp:/root/fabric-ca-client/org1/admin/msp
+      - ../../../../karna/volumes/tls/root-ca:/root-ca/tls
+      - ../../../../karna/volumes/org1/root-ca:/root-ca/org1
+
+

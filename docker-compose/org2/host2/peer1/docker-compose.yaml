@@ -1,0 +1,20 @@
+version: "2"
+
+networks:
+  dev-net:
+    external:
+      name: karna-dev-net
+
+services:
+  karna-org1-peer1:
+    container_name: karna-org1-peer1
+    image: msassone/karna-org1-peer1:latest
+    networks:
+      dev-net:
+        ipv4_address: 172.20.0.21
+    volumes:
+      - ../../../karna/org1/peer1/var/run:/var/run
+      - ../../../karna/org1/peer1/node:/etc/hyperledger/fabric
+      - ../../../karna/org1/peer1/ca/ca-client:/root/fabric-ca-client
+    ports:
+      - 7051:7051

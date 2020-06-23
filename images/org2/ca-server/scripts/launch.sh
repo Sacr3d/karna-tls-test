@@ -8,7 +8,7 @@ initFabric() {
 
     echo "Initalizing fabric-ca-server"
 
-    fabric-ca-server init -b org2-ca-admin:org2-ca-adminpw
+    fabric-ca-server init -b org2-ca-admin:org2-ca-adminpw --address 172.20.0.13
 
 }
 
@@ -16,7 +16,7 @@ startFabric() {
 
     echo "Starting fabric-ca-server"
 
-    fabric-ca-server start -b org2-ca-admin:org2-ca-adminpw
+    fabric-ca-server start -d -b org2-ca-admin:org2-ca-adminpw --address 172.20.0.13
 
 }
 
@@ -25,6 +25,7 @@ init() {
     if test -f "$FILE"; then
         echo "$FILE exists."
         echo "Will not generate new crypto"
+
         startFabric
     else
         echo "$FILE does not exist."
@@ -36,11 +37,7 @@ init() {
             echo "$CONFIG_DIR exists."
             echo "Copying configs to new directory"
 
-            mkdir -p $FABRIC_CA_CLIENT_HOME/admin
-
-            mv /configs/fabric-ca-server-config.yaml $FABRIC_CA_SERVER_HOME/
-
-            mv /configs/fabric-ca-client-config.yaml $FABRIC_CA_CLIENT_HOME/admin
+            mv /configs/fabric-ca-server-config.yaml "$FABRIC_CA_SERVER_HOME"
 
             startFabric
 

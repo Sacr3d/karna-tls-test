@@ -60,7 +60,7 @@ mspdir: msp
 tls:
   # TLS section for secure socket connection
   certfiles:
-    - /etc/hyperledger/fabric-ca-server/tls-cert.pem
+    - /root/fabric-ca-client/tls-cert.pem
   client:
     certfile:
     keyfile:
@@ -100,7 +100,7 @@ tls:
 #
 #############################################################################
 csr:
-  cn: karna-org1-server-ca
+  cn: karna-org1-peer1-ca
   keyrequest:
     algo: ecdsa
     size: 256

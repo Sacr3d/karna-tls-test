@@ -36,9 +36,9 @@ init() {
             echo "$CONFIG_DIR exists."
             echo "Copying configs to new directory"
 
-            mkdir -p $FABRIC_CA_CLIENT_HOME/admin
+            mkdir -p "$FABRIC_CA_CLIENT_HOME/admin"
 
-            mv /configs/fabric-ca-server-config.yaml $FABRIC_CA_SERVER_HOME/
+            mv /configs/fabric-ca-server-config.yaml "$FABRIC_CA_SERVER_HOME"
 
             startFabric
 

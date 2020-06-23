@@ -3,7 +3,7 @@
 # Data is stored under /var/hyperledger/db and /var/hyperledger/production
 
 FROM msassone/karna-base-peer:latest
-LABEL maintainer "University of Southampton <mattia.sassone@gmail.com>"
+LABEL maintainer "University of Southampton <mattia.sassone.com>"
 
 ENV FABRIC_CFG_PATH /etc/hyperledger/fabric
 ENV FABRIC_CA_CLIENT_HOME /root/fabric-ca-client

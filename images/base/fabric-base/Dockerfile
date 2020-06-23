@@ -9,7 +9,7 @@
 # Workdir is set to $GOPATH/src/github.com/hyperledger/fabric
 # Data is stored under /var/hyperledger/production
 
-FROM msassone/karna-base-ca:latest
+FROM golang:alpine
 LABEL maintainer "University of Southampton <mattia.sassone@gmail.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -75,11 +75,8 @@ RUN cd $GOPATH/src/github.com/hyperledger \
     && rm v${PROJECT_VERSION}.zip \
     && mv fabric-${PROJECT_VERSION} fabric \
     && mkdir -p /etc/security \
-    && cp $FABRIC_ROOT/devenv/limits.conf /etc/security/limits.conf \
-    && cp -r $FABRIC_ROOT/sampleconfig/* $FABRIC_CFG_PATH/ \
-    && cp $FABRIC_ROOT/examples/cluster/config/configtx.yaml $FABRIC_CFG_PATH/ \
-    && cp $FABRIC_ROOT/examples/cluster/config/cryptogen.yaml $FABRIC_CFG_PATH/
-
+    && cp $FABRIC_ROOT/devenv/limits.conf /etc/security/limits.conf 
+    
 # Install configtxgen, cryptogen, configtxlator and discover
 RUN cd $FABRIC_ROOT/ \
     && CGO_CFLAGS=" " go install -tags "" -ldflags "" github.com/hyperledger/fabric/common/tools/configtxgen \
